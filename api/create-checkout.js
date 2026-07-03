@@ -4,7 +4,7 @@
 // Receives the buyer's cart ({ cart: [{ id, qty }, ...] }) from the browser,
 // looks up authoritative prices from the CATALOG below (never trusts prices
 // sent by the client), and asks Square to create a hosted Payment Link.
-// The browser is then redirected to that link to complete payment on Square.
+// Shipping method and cost are chosen by the buyer on Square's checkout page.
 
 const crypto = require("crypto");
 
@@ -21,15 +21,38 @@ const CATALOG = {
   },
 };
 
-// ---- Authoritative shipping rates (must match SHIPPING_RATES in index.html) ----
-// Square's Checkout API only accepts a single fixed shipping_fee per order,
-// so the buyer's choice is made on our own site and sent here as
-// `shippingMethod`; this file looks up the real price server-side (never
-// trusts a price from the client) and applies it to the order.
-const SHIPPING_OPTIONS = {
-  standard: { name: "Standard Shipping (2-5 business days)", amountCents: 1299 },
-  express: { name: "Express Shipping (1-3 business days)", amountCents: 1899 },
-};
+const SHIPPING_OPTIONS = [
+  {
+    name: "Standard Shipping (2-5 Business Days)",
+    amount: 1299,
+  },
+  {
+    name: "Express Shipping (1-3 Business Days)",
+    amount: 1899,
+  },
+];
+
+function parseRequestBody(req) {
+  try {
+    const raw = req.body;
+    if (raw == null || raw === "") return {};
+    if (typeof raw === "object" && !Buffer.isBuffer(raw)) return raw;
+    if (typeof raw === "string") return raw.trim() ? JSON.parse(raw) : {};
+    return {};
+  } catch (_err) {
+    const error = new Error("Invalid JSON");
+    error.statusCode = 400;
+    throw error;
+  }
+}
+
+function resolveSquareEnvironment() {
+  if (process.env.SQUARE_ENVIRONMENT) {
+    return String(process.env.SQUARE_ENVIRONMENT).toLowerCase();
+  }
+  if (process.env.VERCEL_ENV === "production") return "production";
+  return "sandbox";
+}
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
@@ -37,13 +60,10 @@ module.exports = async (req, res) => {
     return;
   }
 
-  // ---- Required environment variables (set these in Vercel Project Settings) ----
   const ACCESS_TOKEN = process.env.SQUARE_ACCESS_TOKEN;
   const LOCATION_ID = process.env.SQUARE_LOCATION_ID;
   const CURRENCY = process.env.SQUARE_CURRENCY || "AUD";
-  const SQUARE_ENVIRONMENT = String(
-    process.env.SQUARE_ENVIRONMENT || "sandbox"
-  ).toLowerCase();
+  const SQUARE_ENVIRONMENT = resolveSquareEnvironment();
   const IS_SANDBOX = SQUARE_ENVIRONMENT === "sandbox";
 
   if (!ACCESS_TOKEN || !LOCATION_ID) {
@@ -56,7 +76,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const body = req.body || {};
+    const body = parseRequestBody(req);
     const cart = Array.isArray(body.cart) ? body.cart : [];
 
     if (cart.length === 0) {
@@ -64,7 +84,6 @@ module.exports = async (req, res) => {
       return;
     }
 
-    // Build line items server-side from the trusted catalog above.
     const line_items = [];
     for (const entry of cart) {
       const product = CATALOG[entry && entry.id];
@@ -85,16 +104,23 @@ module.exports = async (req, res) => {
       return;
     }
 
-    // Never trust the client for the price — only which option they picked,
-    // and only if it's one we recognize. Default to standard otherwise.
-    const requestedMethod = body.shippingMethod;
-    const shipping = SHIPPING_OPTIONS[requestedMethod] || SHIPPING_OPTIONS.standard;
-
     const baseUrl = IS_SANDBOX
       ? "https://connect.squareupsandbox.com"
       : "https://connect.squareup.com";
 
-    const origin = `https://${req.headers.host}`;
+    const origin = req.headers["x-forwarded-host"]
+      ? `https://${req.headers["x-forwarded-host"]}`
+      : req.headers.host
+        ? `https://${req.headers.host}`
+        : "https://localhost";
+
+    const shipping_fee_options = SHIPPING_OPTIONS.map((option) => ({
+      name: option.name,
+      charge: {
+        amount: option.amount,
+        currency: CURRENCY,
+      },
+    }));
 
     const payload = {
       idempotency_key: crypto.randomUUID(),
@@ -105,13 +131,7 @@ module.exports = async (req, res) => {
       checkout_options: {
         ask_for_shipping_address: true,
         redirect_url: `${origin}/thank-you.html`,
-        shipping_fee: {
-          name: shipping.name,
-          charge: {
-            amount: shipping.amountCents,
-            currency: CURRENCY,
-          },
-        },
+        shipping_fee_options,
       },
     };
 
@@ -141,6 +161,11 @@ module.exports = async (req, res) => {
 
     res.status(200).json({ url: data.payment_link.url });
   } catch (err) {
+    if (err.statusCode === 400) {
+      res.status(400).json({ error: "Invalid request body. Please refresh and try again." });
+      return;
+    }
+
     console.error("create-checkout error:", err);
     res.status(500).json({ error: "Server error creating checkout." });
   }
