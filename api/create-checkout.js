@@ -90,13 +90,6 @@ module.exports = async (req, res) => {
       checkout_options: {
         ask_for_shipping_address: true,
         redirect_url: `${origin}/thank-you.html`,
-        shipping_fee: {
-          name: "Standard Shipping",
-          charge: {
-            amount: 1299,
-            currency: CURRENCY,
-          },
-        },
       },
     };
 
