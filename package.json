@@ -1,0 +1,9 @@
+{
+  "name": "pave-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PAVE hair care storefront — static site + Vercel serverless function that creates Square Payment Links for checkout.",
+  "engines": {
+    "node": ">=18.x"
+  }
+}
