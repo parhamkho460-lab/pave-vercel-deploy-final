@@ -11,10 +11,14 @@ const crypto = require("crypto");
 // ---- Authoritative product catalog (must match assets/PRODUCTS in index.html) ----
 const CATALOG = {
   "matte-clay": { name: "PAVE Matte Clay (100g)", priceCents: 2999 },
-  "curl-cream": { name: "PAVE Leave-In Curl Cream (250ml)", priceCents: 2999 },
+  "curl-cream": { name: "PAVE Leave-In Curl Cream (250ml)", priceCents: 3499 },
   "sea-salt-spray": { name: "PAVE Sea Salt Spray (200ml)", priceCents: 2999 },
-  "curl-spray": { name: "PAVE Curl Spray (125ml)", priceCents: 2999 },
+  "curl-spray": { name: "PAVE Curl Spray (125ml)", priceCents: 2499 },
   "texture-powder": { name: "PAVE Texture Powder (2g)", priceCents: 2999 },
+  "bundle-the-ultimate-texture-routine": {
+    name: "PAVE Ultimate Texture Routine Bundle",
+    priceCents: 7999,
+  },
 };
 
 module.exports = async (req, res) => {
@@ -27,7 +31,10 @@ module.exports = async (req, res) => {
   const ACCESS_TOKEN = process.env.SQUARE_ACCESS_TOKEN;
   const LOCATION_ID = process.env.SQUARE_LOCATION_ID;
   const CURRENCY = process.env.SQUARE_CURRENCY || "AUD";
-  const IS_PROD = process.env.SQUARE_ENVIRONMENT === "production";
+  const SQUARE_ENVIRONMENT = String(
+    process.env.SQUARE_ENVIRONMENT || "sandbox"
+  ).toLowerCase();
+  const IS_SANDBOX = SQUARE_ENVIRONMENT === "sandbox";
 
   if (!ACCESS_TOKEN || !LOCATION_ID) {
     console.error("Missing SQUARE_ACCESS_TOKEN or SQUARE_LOCATION_ID env vars.");
@@ -68,9 +75,9 @@ module.exports = async (req, res) => {
       return;
     }
 
-    const baseUrl = IS_PROD
-      ? "https://connect.squareup.com"
-      : "https://connect.squareupsandbox.com";
+    const baseUrl = IS_SANDBOX
+      ? "https://connect.squareupsandbox.com"
+      : "https://connect.squareup.com";
 
     const origin = `https://${req.headers.host}`;
 
