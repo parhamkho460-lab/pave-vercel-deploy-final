@@ -88,7 +88,7 @@ module.exports = async (req, res) => {
         line_items,
       },
       checkout_options: {
-        ask_for_shipping_address: true,
+        ask_for_shipping_address: false,
         redirect_url: `${origin}/thank-you.html`,
       },
     };
