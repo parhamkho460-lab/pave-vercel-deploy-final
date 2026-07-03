@@ -93,7 +93,7 @@ module.exports = async (req, res) => {
         shipping_fee: {
           name: "Standard Shipping",
           charge: {
-            amount: 1000,
+            amount: 1299,
             currency: CURRENCY,
           },
         },
