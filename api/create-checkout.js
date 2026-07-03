@@ -21,6 +21,16 @@ const CATALOG = {
   },
 };
 
+// ---- Authoritative shipping rates (must match SHIPPING_RATES in index.html) ----
+// Square's Checkout API only accepts a single fixed shipping_fee per order,
+// so the buyer's choice is made on our own site and sent here as
+// `shippingMethod`; this file looks up the real price server-side (never
+// trusts a price from the client) and applies it to the order.
+const SHIPPING_OPTIONS = {
+  standard: { name: "Standard Shipping (2-5 business days)", amountCents: 1299 },
+  express: { name: "Express Shipping (1-3 business days)", amountCents: 1899 },
+};
+
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
@@ -75,6 +85,11 @@ module.exports = async (req, res) => {
       return;
     }
 
+    // Never trust the client for the price — only which option they picked,
+    // and only if it's one we recognize. Default to standard otherwise.
+    const requestedMethod = body.shippingMethod;
+    const shipping = SHIPPING_OPTIONS[requestedMethod] || SHIPPING_OPTIONS.standard;
+
     const baseUrl = IS_SANDBOX
       ? "https://connect.squareupsandbox.com"
       : "https://connect.squareup.com";
@@ -90,10 +105,10 @@ module.exports = async (req, res) => {
       checkout_options: {
         ask_for_shipping_address: true,
         redirect_url: `${origin}/thank-you.html`,
-        shipping_options: {
-          type: "SHIPPING",
-          allowed_shipping_countries: ["AU"],
-        },
+        // TEMPORARILY REMOVED shipping_fee — testing whether the dashboard's
+        // "Enable shipping" toggle + your rate profiles apply automatically
+        // to payment links created via the API. Put shipping_fee back if this
+        // doesn't work.
       },
     };
 
