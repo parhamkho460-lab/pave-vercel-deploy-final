@@ -90,6 +90,10 @@ module.exports = async (req, res) => {
       checkout_options: {
         ask_for_shipping_address: true,
         redirect_url: `${origin}/thank-you.html`,
+        shipping_options: {
+          type: "SHIPPING",
+          allowed_shipping_countries: ["AU"],
+        },
       },
     };
 
