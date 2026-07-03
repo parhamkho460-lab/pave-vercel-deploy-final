@@ -105,10 +105,13 @@ module.exports = async (req, res) => {
       checkout_options: {
         ask_for_shipping_address: true,
         redirect_url: `${origin}/thank-you.html`,
-        // TEMPORARILY REMOVED shipping_fee — testing whether the dashboard's
-        // "Enable shipping" toggle + your rate profiles apply automatically
-        // to payment links created via the API. Put shipping_fee back if this
-        // doesn't work.
+        shipping_fee: {
+          name: shipping.name,
+          charge: {
+            amount: shipping.amountCents,
+            currency: CURRENCY,
+          },
+        },
       },
     };
 
