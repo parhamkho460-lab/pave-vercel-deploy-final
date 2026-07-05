@@ -141,6 +141,8 @@
   .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:56px; flex-wrap:wrap;}
   .section-head h2{font-size:clamp(32px,4vw,48px); font-weight:400;}
   #lineup .section-head h2{font-size:clamp(28px,3.4vw,40px); color:#9b6cff;}
+  #lineup{padding-top:56px;}
+  #lineup .section-head{margin-bottom:28px;}
   .section-head .lede{margin-top:14px;}
 
   .lineup{background:var(--black);}
@@ -374,7 +376,7 @@
     <div class="cart-subtotal"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
     <button class="btn btn-primary cart-checkout" id="cartCheckoutBtn">Checkout</button>
     <div class="cart-error" id="cartError"></div>
-    <div class="cart-note">Shipping options are chosen on Square's secure checkout page.</div>
+
   </div>
 </aside>
 
@@ -420,6 +422,7 @@
         </div>
       </div>
       <div class="hero-visual reveal">
+        <a href="#matte-clay" style="display:block;" aria-label="Shop Matte Clay">
         <div class="hero-image-frame">
           <div class="best-seller-badge">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9-6.3 3.9 1.7-7L2 9.2l7.1-.6z"/></svg>
@@ -427,6 +430,7 @@
           </div>
           <img src="clay.png" alt="PAVE Matte Clay tin, 100g">
         </div>
+        </a>
         <div class="hero-badge-float">
           <div><div class="num">4.9</div></div>
           <div><div class="stars">★★★★★</div><div class="lbl">582 REVIEWS</div></div>
@@ -450,10 +454,10 @@
     <div class="wrap">
       <div class="section-head reveal">
         <div><span class="eyebrow">Find Your Match</span><h2>Quick Hair Quiz</h2></div>
-        <p class="lede">Answer three fast questions and we’ll recommend the best PAVE routine for your hair.</p>
+        <p class="lede">Answer 5 fast questions and we’ll recommend the best PAVE routine for your hair.</p>
       </div>
       <div class="quiz-card reveal" id="quizCard">
-        <div class="quiz-progress" id="quizProgress">Question 1 of 3</div>
+        <div class="quiz-progress" id="quizProgress">Question 1 of 5</div>
         <h3 class="quiz-question" id="quizQuestion"></h3>
         <div class="quiz-options" id="quizOptions"></div>
         <div class="quiz-controls">
@@ -495,8 +499,8 @@
   <section class="section routines">
     <div class="wrap">
       <div class="section-head reveal">
-        <div><span class="eyebrow">Shop Together</span><h2>Build A Routine</h2></div>
-        <p class="lede">Bundle these products for a complete hairstyling routine.</p>
+        <div><span class="eyebrow">Bundle Together</span><h2>Build A Routine</h2></div>
+        <p class="lede">Bundle these products for a complete hair routine.</p>
       </div>
       <div class="routine-grid" id="routineList"></div>
     </div>
@@ -532,32 +536,32 @@
         <div class="review-card reveal">
           <span class="review-stars">★★★★★</span>
           <p class="quote">"Finally a clay that doesn't turn my hair into a helmet. Reworkable all day and it actually smells incredible."</p>
-          <div class="review-who"><div class="avatar">JT</div><div><div class="name">Jordan T.</div><div class="meta">Sydney, NSW · The Texture Routine</div><div class="verified">✓ Verified Buyer</div></div></div>
+          <div class="review-who"><div class="avatar">JT</div><div><div class="name">Jordan T.</div><div class="meta">Sydney, NSW · Matte Clay</div><div class="verified">✓ Verified Buyer</div></div></div>
         </div>
         <div class="review-card reveal">
           <span class="review-stars">★★★★★</span>
           <p class="quote">"My curls have never been this defined without feeling crunchy. This is the one I keep repurchasing."</p>
-          <div class="review-who"><div class="avatar">MD</div><div><div class="name">Marcus D.</div><div class="meta">Melbourne, VIC · The Curly Routine</div><div class="verified">✓ Verified Buyer</div></div></div>
+          <div class="review-who"><div class="avatar">MD</div><div><div class="name">Marcus D.</div><div class="meta">Melbourne, VIC · Curl Cream</div><div class="verified">✓ Verified Buyer</div></div></div>
         </div>
         <div class="review-card reveal">
           <span class="review-stars">★★★★★</span>
           <p class="quote">"Doesn't dry my hair out like every other salt spray I've tried. Huge difference — even my barber noticed."</p>
-          <div class="review-who"><div class="avatar">LK</div><div><div class="name">Liam K.</div><div class="meta">Brisbane, QLD · The Wavy Routine</div><div class="verified">✓ Verified Buyer</div></div></div>
+          <div class="review-who"><div class="avatar">LK</div><div><div class="name">Liam K.</div><div class="meta">Brisbane, QLD · Sea Salt Spray</div><div class="verified">✓ Verified Buyer</div></div></div>
         </div>
         <div class="review-card reveal">
           <span class="review-stars">★★★★☆</span>
           <p class="quote">"Great definition and a little goes a long way. My go-to for second-day curls, already reordering."</p>
-          <div class="review-who"><div class="avatar">TR</div><div><div class="name">Tyler R.</div><div class="meta">Perth, WA · The Curly Routine</div><div class="verified">✓ Verified Buyer</div></div></div>
+          <div class="review-who"><div class="avatar">TR</div><div><div class="name">Tyler R.</div><div class="meta">Perth, WA · Curl Spray</div><div class="verified">✓ Verified Buyer</div></div></div>
         </div>
         <div class="review-card reveal">
           <span class="review-stars">★★★★★</span>
           <p class="quote">"Two grams doesn't sound like much until you actually use it. Instant root lift, zero weight."</p>
-          <div class="review-who"><div class="avatar">EW</div><div><div class="name">Ethan W.</div><div class="meta">Adelaide, SA · The Texture Routine</div><div class="verified">✓ Verified Buyer</div></div></div>
+          <div class="review-who"><div class="avatar">EW</div><div><div class="name">Ethan W.</div><div class="meta">Adelaide, SA · Texture Powder</div><div class="verified">✓ Verified Buyer</div></div></div>
         </div>
         <div class="review-card reveal">
           <span class="review-stars">★★★★★</span>
           <p class="quote">"Switched from three other brands over the years. Nothing else holds like this once it gets humid."</p>
-          <div class="review-who"><div class="avatar">CS</div><div><div class="name">Cooper S.</div><div class="meta">Gold Coast, QLD · The Ultimate Texture Routine</div><div class="verified">✓ Verified Buyer</div></div></div>
+          <div class="review-who"><div class="avatar">CS</div><div><div class="name">Cooper S.</div><div class="meta">Gold Coast, QLD · Matte Clay</div><div class="verified">✓ Verified Buyer</div></div></div>
         </div>
       </div>
     </div>
@@ -581,6 +585,7 @@
         <div class="faq-item"><button class="faq-q">How long does each product last?<span class="plus">+</span></button><div class="faq-a"><p>It varies on how much use and which product, but generally each product should last 1-3 months.</p></div></div>
         <div class="faq-item"><button class="faq-q">Where is PAVE made?<span class="plus">+</span></button><div class="faq-a"><p>All five formulas are made in Australia.</p></div></div>
         <div class="faq-item"><button class="faq-q">Do you offer a guarantee?<span class="plus">+</span></button><div class="faq-a"><p>Try any product for 30 days. If it's not right for your hair, we'll refund you.</p></div></div>
+        <div class="faq-item"><button class="faq-q">How do I know what products to use on my hair?<span class="plus">+</span></button><div class="faq-a"><p>Take our quick and simple quiz to find the optimal products for your hair.</p><a href="#quiz" class="btn btn-primary" style="margin-top:16px; display:inline-flex;">Take the Quiz</a></div></div>
       </div>
     </div>
   </section>
@@ -756,38 +761,99 @@
     {
       question: 'What is your hair type?',
       options: [
-        { label: 'Fine or flat', scores: { 'texture-powder': 2, 'matte-clay': 1 } },
-        { label: 'Thick and coarse', scores: { 'matte-clay': 2, 'sea-salt-spray': 1 } },
-        { label: 'Wavy or loose curls', scores: { 'sea-salt-spray': 2, 'curl-spray': 1 } },
-        { label: 'Curly and frizz-prone', scores: { 'curl-cream': 2, 'curl-spray': 1 } },
+        { label: 'Straight or flat', scores: { 'texture-powder': 3, 'matte-clay': 2 } },
+        { label: 'Thick and coarse', scores: { 'matte-clay': 3, 'sea-salt-spray': 1 } },
+        { label: 'Wavy or loose curls', scores: { 'sea-salt-spray': 3, 'matte-clay': 1 } },
+        { label: 'Curly and frizz-prone', scores: { 'curl-cream': 3, 'curl-spray': 2 } },
       ]
     },
     {
-      question: 'What do you want most from your styling product?',
+      question: 'What do you want most from your styling routine?',
       options: [
         { label: 'Texture and grit', scores: { 'matte-clay': 2, 'texture-powder': 2 } },
-        { label: 'Volume and lift', scores: { 'texture-powder': 2, 'sea-salt-spray': 1 } },
+        { label: 'Volume and lift', scores: { 'texture-powder': 3, 'sea-salt-spray': 1 } },
         { label: 'Curl definition', scores: { 'curl-cream': 2, 'curl-spray': 1 } },
-        { label: 'Frizz control', scores: { 'curl-cream': 2, 'curl-spray': 1 } },
+        { label: 'Frizz control', scores: { 'curl-cream': 3, 'curl-spray': 1 } },
       ]
     },
     {
-      question: 'What is your biggest styling struggle?',
+      question: 'What finish do you prefer?',
       options: [
-        { label: 'Hair goes flat too fast', scores: { 'texture-powder': 2, 'matte-clay': 1 } },
-        { label: 'Curls lose shape after a few hours', scores: { 'curl-cream': 2, 'curl-spray': 1 } },
-        { label: 'I want natural beach waves', scores: { 'sea-salt-spray': 2 } },
-        { label: 'Hair feels stiff or sticky', scores: { 'curl-spray': 1, 'sea-salt-spray': 1 } },
+        { label: 'Matte — natural, no shine', scores: { 'matte-clay': 2, 'texture-powder': 2 } },
+        { label: 'Natural — relaxed, effortless look', scores: { 'sea-salt-spray': 2, 'curl-spray': 1 } },
+        { label: 'Soft — touchable, not stiff or crunchy', scores: { 'curl-cream': 2, 'curl-spray': 2 } },
+        { label: "I don't mind — just want great hair", scores: { 'sea-salt-spray': 1, 'texture-powder': 1 } },
+      ]
+    },
+    {
+      question: 'How much time do you spend styling each morning?',
+      options: [
+        { label: 'Under 2 minutes — quick and easy', scores: { 'texture-powder': 2, 'curl-spray': 2 } },
+        { label: '5–10 minutes — I like to style properly', scores: { 'matte-clay': 1, 'sea-salt-spray': 1 } },
+        { label: 'I take my time — I want the best result', scores: { 'matte-clay': 1, 'curl-cream': 1 } },
+      ]
+    },
+    {
+      question: 'What style are you going for?',
+      options: [
+        { label: 'Clean and structured — sharp, intentional', scores: { 'matte-clay': 3, 'texture-powder': 2 } },
+        { label: 'Textured and effortless — lived-in, casual', scores: { 'sea-salt-spray': 3, 'texture-powder': 2 } },
+        { label: 'Defined curls — enhanced natural shape', scores: { 'curl-cream': 3, 'curl-spray': 2 } },
+        { label: 'Full and voluminous — big hair energy', scores: { 'texture-powder': 3, 'sea-salt-spray': 2 } },
       ]
     },
   ];
 
-  const QUIZ_RECOMMENDATIONS = {
-    'matte-clay': { title: 'Matte Clay', copy: 'Best for textured styles that need strong hold and a matte finish. Ideal if you want grit without crunch.' },
-    'texture-powder': { title: 'Texture Powder', copy: 'Perfect for flat or fine hair that needs instant lift, grip and a clean textured finish.' },
-    'sea-salt-spray': { title: 'Sea Salt Spray', copy: 'Great for natural waves, light hold and effortless beachy texture.' },
-    'curl-cream': { title: 'Leave-In Curl Cream', copy: 'Designed for curl definition, softness and frizz control without stiffness.' },
-    'curl-spray': { title: 'Curl Spray', copy: 'Refreshes curls between washes, fights frizz and keeps shape without crunch.' },
+  /* Curated copy for each result pair */
+  const PAIR_COPY = {
+    'matte-clay|texture-powder': {
+      title: 'The Texture Routine',
+      copy: 'Built for clean, structured texture that lasts all day. Powder builds grip from the roots; clay locks the shape with a natural matte finish.',
+      ids: ['matte-clay', 'texture-powder'],
+    },
+    'texture-powder|matte-clay': {
+      title: 'The Texture Routine',
+      copy: 'Built for clean, structured texture that lasts all day. Powder builds grip from the roots; clay locks the shape with a natural matte finish.',
+      ids: ['matte-clay', 'texture-powder'],
+    },
+    'sea-salt-spray|matte-clay': {
+      title: 'The Structured Texture Routine',
+      copy: 'Sea Salt Spray creates the base movement and texture; Matte Clay locks it in for a style that holds all day without looking overdone.',
+      ids: ['sea-salt-spray', 'matte-clay'],
+    },
+    'matte-clay|sea-salt-spray': {
+      title: 'The Structured Texture Routine',
+      copy: 'Sea Salt Spray creates the base movement and texture; Matte Clay locks it in for a style that holds all day without looking overdone.',
+      ids: ['sea-salt-spray', 'matte-clay'],
+    },
+    'sea-salt-spray|texture-powder': {
+      title: 'The Effortless Volume Routine',
+      copy: 'Sea Salt Spray brings the wave and movement; Texture Powder adds grip and lift at the roots. Maximum texture, minimum effort.',
+      ids: ['sea-salt-spray', 'texture-powder'],
+    },
+    'texture-powder|sea-salt-spray': {
+      title: 'The Effortless Volume Routine',
+      copy: 'Sea Salt Spray brings the wave and movement; Texture Powder adds grip and lift at the roots. Maximum texture, minimum effort.',
+      ids: ['sea-salt-spray', 'texture-powder'],
+    },
+    'curl-cream|curl-spray': {
+      title: 'The Curly Routine',
+      copy: 'Leave-In Curl Cream defines and nourishes on wash day. Curl Spray keeps your curls refreshed and shaped every day after — no re-washing needed.',
+      ids: ['curl-cream', 'curl-spray'],
+    },
+    'curl-spray|curl-cream': {
+      title: 'The Curly Routine',
+      copy: 'Leave-In Curl Cream defines and nourishes on wash day. Curl Spray keeps your curls refreshed and shaped every day after — no re-washing needed.',
+      ids: ['curl-cream', 'curl-spray'],
+    },
+  };
+
+  const FALLBACK_PAIRS = {
+    'matte-clay':     ['matte-clay', 'texture-powder'],
+    'texture-powder': ['texture-powder', 'sea-salt-spray'],
+    'sea-salt-spray': ['sea-salt-spray', 'texture-powder'],
+    'curl-cream':     ['curl-cream', 'curl-spray'],
+    'curl-spray':     ['curl-spray', 'curl-cream'],
   };
 
   let quizStep = 0;
@@ -801,7 +867,7 @@
     document.getElementById('quizResultAdd').addEventListener('click', ()=> {
       const resultEl = document.getElementById('quizResult');
       const ids = JSON.parse(resultEl.dataset.ids || '[]');
-      if(ids.length){ addBundle(ids); }
+      if(ids.length){ ids.forEach(id => addToCart(id)); openCart(); }
     });
   }
 
@@ -826,6 +892,7 @@
       document.getElementById('quizNext').disabled = true;
     }
     document.getElementById('quizBack').disabled = quizStep === 0;
+    document.getElementById('quizNext').textContent = quizStep === QUIZ_QUESTIONS.length - 1 ? 'See My Routine' : 'Next';
   }
 
   function selectQuizOption(index){
@@ -863,25 +930,28 @@
       });
     });
     const ranked = Object.entries(scores).sort((a,b) => b[1] - a[1]).map(([id]) => id);
-    const topPair = ranked.slice(0, 2);
-    const bundle = ROUTINES.find(r => r.discountPrice && r.ids.every(id => topPair.includes(id)));
-    const resultEl = document.getElementById('quizResult');
-    if(bundle){
-      const recommendation = bundle;
-      document.getElementById('quizResultTitle').textContent = `${recommendation.title} Bundle`;
-      document.getElementById('quizResultCopy').textContent = `This bundle saves you money and gives you the best matched routine for your hair needs.`;
-      resultEl.dataset.type = 'routine';
-      resultEl.dataset.ids = JSON.stringify(recommendation.ids);
-      document.getElementById('quizResultAdd').textContent = 'Add Bundle';
-    } else {
-      const primary = PRODUCT_MAP[topPair[0] || 'matte-clay'];
-      const secondary = PRODUCT_MAP[topPair[1] || topPair[0] || 'texture-powder'];
-      document.getElementById('quizResultTitle').textContent = `Best Pair: ${primary.name} + ${secondary.name}`;
-      document.getElementById('quizResultCopy').textContent = `Pair these two products together for stronger texture, hold and definition.`;
-      resultEl.dataset.type = 'pair';
-      resultEl.dataset.ids = JSON.stringify([primary.id, secondary.id]);
-      document.getElementById('quizResultAdd').textContent = 'Add Both';
+    let primary = ranked[0] || 'matte-clay';
+    let secondary = ranked[1] || FALLBACK_PAIRS[primary][1];
+    if(secondary === primary){ secondary = FALLBACK_PAIRS[primary][1]; }
+
+    const pairKey = primary + '|' + secondary;
+    const altKey  = secondary + '|' + primary;
+    let pair = PAIR_COPY[pairKey] || PAIR_COPY[altKey];
+    if(!pair){
+      const fb = FALLBACK_PAIRS[primary];
+      pair = PAIR_COPY[fb[0] + '|' + fb[1]] || PAIR_COPY[fb[1] + '|' + fb[0]];
+      pair = pair || { title: 'Your Routine', copy: 'These two products work best together for your hair type and goals.', ids: [primary, secondary] };
     }
+
+    const p1 = PRODUCT_MAP[pair.ids[0]];
+    const p2 = PRODUCT_MAP[pair.ids[1]];
+    const combined = (p1.price + p2.price).toFixed(2);
+
+    const resultEl = document.getElementById('quizResult');
+    document.getElementById('quizResultTitle').textContent = pair.title;
+    document.getElementById('quizResultCopy').textContent = pair.copy;
+    resultEl.dataset.ids = JSON.stringify(pair.ids);
+    document.getElementById('quizResultAdd').textContent = `Add Both To Bag — $${combined}`;
     resultEl.classList.remove('hidden');
     document.getElementById('quizNext').textContent = 'Retake Quiz';
     document.getElementById('quizNext').disabled = false;
@@ -904,7 +974,7 @@
     el.innerHTML = PRODUCTS.map((p, idx) => {
       const saleOld = p.price === 24.99 ? 34.99 : p.price === 34.99 ? 44.99 : 39.99;
       return `
-      <div class="product-row reveal ${idx % 2 === 1 ? 'flip' : ''}">
+      <div id="${p.id}" class="product-row reveal ${idx % 2 === 1 ? 'flip' : ''}">
         <div class="p-media">
           <div class="p-media-main">
             <img id="img-${p.id}" src="${p.images[0]}" alt="PAVE ${p.name} product image" loading="lazy" onclick="openProductModal('${p.id}', 0)" style="cursor:pointer;">
