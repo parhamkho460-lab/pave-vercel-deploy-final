@@ -154,6 +154,16 @@
 
   .p-media-main{position:relative; border-radius:8px; overflow:hidden; background:var(--panel); border:1px solid var(--line);}
   .p-media-main img{width:100%; aspect-ratio:4/5; object-fit:cover; transition:opacity .25s ease;}
+  .p-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+    width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:rgba(10,10,13,.55); border:1px solid var(--line-strong); color:var(--white);
+    backdrop-filter:blur(4px); transition:background .2s, border-color .2s, transform .2s;
+  }
+  .p-arrow:hover{background:var(--violet); border-color:var(--violet); transform:translateY(-50%) scale(1.06);}
+  .p-arrow svg{width:18px; height:18px;}
+  .p-arrow.prev{left:12px;}
+  .p-arrow.next{right:12px;}
   .p-thumbs{display:flex; gap:10px; margin-top:12px;}
   .p-thumb{width:62px; height:62px; border-radius:6px; overflow:hidden; border:2px solid var(--line); cursor:pointer; opacity:.55; transition:opacity .2s, border-color .2s; flex-shrink:0; background:var(--panel);}
   .p-thumb img{width:100%; height:100%; object-fit:cover;}
@@ -535,33 +545,33 @@
       <div class="review-grid">
         <div class="review-card reveal">
           <span class="review-stars">★★★★★</span>
-          <p class="quote">"Finally a clay that doesn't turn my hair into a helmet. Reworkable all day and it actually smells incredible."</p>
-          <div class="review-who"><div class="avatar">JT</div><div><div class="name">Jordan T.</div><div class="meta">Sydney, NSW · Matte Clay</div><div class="verified">✓ Verified Buyer</div></div></div>
+          <p class="quote">"Finally a clay and texture powder combo that doesn't turn my hair into a helmet. Reworkable all day and it actually smells incredible."</p>
+          <div class="review-who"><div class="avatar">JT</div><div><div class="name">Jordan T.</div><div class="meta">Sydney, NSW · The Texture Routine</div><div class="verified">✓ Verified Buyer</div></div></div>
         </div>
         <div class="review-card reveal">
           <span class="review-stars">★★★★★</span>
-          <p class="quote">"My curls have never been this defined without feeling crunchy. This is the one I keep repurchasing."</p>
-          <div class="review-who"><div class="avatar">MD</div><div><div class="name">Marcus D.</div><div class="meta">Melbourne, VIC · Curl Cream</div><div class="verified">✓ Verified Buyer</div></div></div>
+          <p class="quote">"My curls have never been this defined without feeling crunchy. This cream and spray combo is the one I keep repurchasing."</p>
+          <div class="review-who"><div class="avatar">MD</div><div><div class="name">Marcus D.</div><div class="meta">Melbourne, VIC · The Curly Routine</div><div class="verified">✓ Verified Buyer</div></div></div>
         </div>
         <div class="review-card reveal">
           <span class="review-stars">★★★★★</span>
-          <p class="quote">"Doesn't dry my hair out like every other salt spray I've tried. Huge difference — even my barber noticed."</p>
-          <div class="review-who"><div class="avatar">LK</div><div><div class="name">Liam K.</div><div class="meta">Brisbane, QLD · Sea Salt Spray</div><div class="verified">✓ Verified Buyer</div></div></div>
+          <p class="quote">"Doesn't dry my hair out like every other salt spray I've tried. Paired with the curl spray, even my barber noticed."</p>
+          <div class="review-who"><div class="avatar">LK</div><div><div class="name">Liam K.</div><div class="meta">Brisbane, QLD · The Wavy Routine</div><div class="verified">✓ Verified Buyer</div></div></div>
         </div>
         <div class="review-card reveal">
           <span class="review-stars">★★★★☆</span>
-          <p class="quote">"Great definition and a little goes a long way. My go-to for second-day curls, already reordering."</p>
-          <div class="review-who"><div class="avatar">TR</div><div><div class="name">Tyler R.</div><div class="meta">Perth, WA · Curl Spray</div><div class="verified">✓ Verified Buyer</div></div></div>
+          <p class="quote">"Great definition and a little goes a long way. My go-to routine for second-day curls, already reordering."</p>
+          <div class="review-who"><div class="avatar">TR</div><div><div class="name">Tyler R.</div><div class="meta">Perth, WA · The Curly Routine</div><div class="verified">✓ Verified Buyer</div></div></div>
         </div>
         <div class="review-card reveal">
           <span class="review-stars">★★★★★</span>
-          <p class="quote">"Two grams doesn't sound like much until you actually use it. Instant root lift, zero weight."</p>
-          <div class="review-who"><div class="avatar">EW</div><div><div class="name">Ethan W.</div><div class="meta">Adelaide, SA · Texture Powder</div><div class="verified">✓ Verified Buyer</div></div></div>
+          <p class="quote">"Two grams doesn't sound like much until you actually use it. Instant root lift, zero weight, and the full routine works together perfectly."</p>
+          <div class="review-who"><div class="avatar">EW</div><div><div class="name">Ethan W.</div><div class="meta">Adelaide, SA · The Ultimate Texture Routine</div><div class="verified">✓ Verified Buyer</div></div></div>
         </div>
         <div class="review-card reveal">
           <span class="review-stars">★★★★★</span>
-          <p class="quote">"Switched from three other brands over the years. Nothing else holds like this once it gets humid."</p>
-          <div class="review-who"><div class="avatar">CS</div><div><div class="name">Cooper S.</div><div class="meta">Gold Coast, QLD · Matte Clay</div><div class="verified">✓ Verified Buyer</div></div></div>
+          <p class="quote">"Switched from three other brands over the years. Nothing else holds like this full routine once it gets humid."</p>
+          <div class="review-who"><div class="avatar">CS</div><div><div class="name">Cooper S.</div><div class="meta">Gold Coast, QLD · The Ultimate Texture Routine</div><div class="verified">✓ Verified Buyer</div></div></div>
         </div>
       </div>
     </div>
@@ -580,12 +590,12 @@
     <div class="wrap">
       <div class="section-head reveal"><div><span class="eyebrow">FAQ</span><h2>Before You Buy</h2></div></div>
       <div class="faq-list reveal">
-        <div class="faq-item open"><button class="faq-q">Is PAVE cruelty-free?<span class="plus">+</span></button><div class="faq-a"><p>Yes. We never test on animals, and we don't work with manufacturers who do either.</p></div></div>
+        <div class="faq-item open"><button class="faq-q">How do I know what products to use on my hair?<span class="plus">+</span></button><div class="faq-a"><p>Take our quick and simple quiz to find the optimal products for your hair.</p><a href="#quiz" class="btn btn-primary" style="margin-top:16px; display:inline-flex;">Take the Quiz</a></div></div>
+        <div class="faq-item"><button class="faq-q">Is PAVE cruelty-free?<span class="plus">+</span></button><div class="faq-a"><p>Yes. We never test on animals, and we don't work with manufacturers who do either.</p></div></div>
         <div class="faq-item"><button class="faq-q">Is it really sulphate and paraben free?<span class="plus">+</span></button><div class="faq-a"><p>Every product in the lineup is formulated without sulphates or parabens.</p></div></div>
         <div class="faq-item"><button class="faq-q">How long does each product last?<span class="plus">+</span></button><div class="faq-a"><p>It varies on how much use and which product, but generally each product should last 1-3 months.</p></div></div>
         <div class="faq-item"><button class="faq-q">Where is PAVE made?<span class="plus">+</span></button><div class="faq-a"><p>All five formulas are made in Australia.</p></div></div>
         <div class="faq-item"><button class="faq-q">Do you offer a guarantee?<span class="plus">+</span></button><div class="faq-a"><p>Try any product for 30 days. If it's not right for your hair, we'll refund you.</p></div></div>
-        <div class="faq-item"><button class="faq-q">How do I know what products to use on my hair?<span class="plus">+</span></button><div class="faq-a"><p>Take our quick and simple quiz to find the optimal products for your hair.</p><a href="#quiz" class="btn btn-primary" style="margin-top:16px; display:inline-flex;">Take the Quiz</a></div></div>
       </div>
     </div>
   </section>
@@ -977,7 +987,15 @@
       <div id="${p.id}" class="product-row reveal ${idx % 2 === 1 ? 'flip' : ''}">
         <div class="p-media">
           <div class="p-media-main">
-            <img id="img-${p.id}" src="${p.images[0]}" alt="PAVE ${p.name} product image" loading="lazy" onclick="openProductModal('${p.id}', 0)" style="cursor:pointer;">
+            <img id="img-${p.id}" src="${p.images[0]}" alt="PAVE ${p.name} product image" loading="lazy" onclick="openProductModal('${p.id}', currentImageIndex('${p.id}'))" style="cursor:pointer;">
+            ${p.images.length > 1 ? `
+              <button type="button" class="p-arrow prev" aria-label="Previous image" onclick="event.stopPropagation(); rotateImage('${p.id}', -1)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <button type="button" class="p-arrow next" aria-label="Next image" onclick="event.stopPropagation(); rotateImage('${p.id}', 1)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            ` : ''}
           </div>
           <div class="p-thumbs">
             ${p.images.map((src, i) => `
@@ -1074,15 +1092,40 @@
     currentModalImageIndex = 0;
   }
 
+  const productImageIndex = {};
+
+  function currentImageIndex(productId){
+    return productImageIndex[productId] || 0;
+  }
+
+  function setActiveThumb(productId, index){
+    const mainImg = document.getElementById('img-' + productId);
+    if(!mainImg) return;
+    const thumbs = mainImg.closest('.p-media').querySelectorAll('.p-thumb');
+    thumbs.forEach((t, i)=> t.classList.toggle('active', i === index));
+  }
+
   function swapImage(productId, src, thumbEl){
     const mainImg = document.getElementById('img-' + productId);
     if(mainImg){ mainImg.style.opacity = 0; setTimeout(()=>{ mainImg.src = src; mainImg.style.opacity = 1; }, 120); }
-    thumbEl.parentElement.querySelectorAll('.p-thumb').forEach(t=>t.classList.remove('active'));
+    const thumbs = thumbEl.parentElement.querySelectorAll('.p-thumb');
+    thumbs.forEach((t, i)=>{
+      t.classList.remove('active');
+      if(t === thumbEl) productImageIndex[productId] = i;
+    });
     thumbEl.classList.add('active');
   }
 
   function rotateImage(productId, delta){
-    // no longer used because product image arrows were removed
+    const product = PRODUCT_MAP[productId];
+    if(!product) return;
+    const total = product.images.length;
+    const current = currentImageIndex(productId);
+    const next = (current + delta + total) % total;
+    productImageIndex[productId] = next;
+    const mainImg = document.getElementById('img-' + productId);
+    if(mainImg){ mainImg.style.opacity = 0; setTimeout(()=>{ mainImg.src = product.images[next]; mainImg.style.opacity = 1; }, 120); }
+    setActiveThumb(productId, next);
   }
 
   // ---------- Cart (persisted in localStorage) ----------
