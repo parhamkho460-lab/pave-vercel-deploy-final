@@ -147,11 +147,14 @@
   .results-tab:hover{color:var(--white); border-color:var(--white-soft);}
   .results-tab.active{background:var(--violet); color:#fff; border-color:var(--violet);}
   .results-body{display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center;}
-  .results-copy .routine-tag{color:var(--violet-soft); font-weight:600; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase;}
-  .results-copy h3{font-size:clamp(26px,3vw,34px); margin:14px 0 16px;}
+  .results-copy .routine-tag{color:#fff; font-weight:600; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase;}
+  .results-copy h3{font-size:clamp(26px,3vw,34px); margin:14px 0 20px;}
   .results-copy p{color:var(--white-soft); font-size:15px; max-width:46ch; margin-bottom:26px;}
-  .after-shot{position:relative; width:100%; max-width:360px; margin:0 auto; aspect-ratio:295/640; border-radius:12px; overflow:hidden; border:1px solid var(--line-strong); box-shadow:0 30px 70px -30px rgba(0,0,0,.7);}
-  .after-shot img{width:100%; height:100%; object-fit:cover; display:block;}
+  .results-products{display:flex; align-items:center; gap:10px; margin-bottom:28px;}
+  .results-products img{width:56px; height:56px; border-radius:10px; object-fit:cover; background:var(--panel); border:1px solid var(--line-strong);}
+  .results-products .plus{color:var(--white-dim); font-size:20px; font-weight:600;}
+  .after-shot{position:relative; width:100%; max-width:460px; margin:0 auto; aspect-ratio:3/5; border-radius:12px; overflow:hidden; border:1px solid var(--line-strong); box-shadow:0 30px 70px -30px rgba(0,0,0,.7); background:#411770;}
+  .after-shot img{width:100%; height:100%; object-fit:contain; display:block;}
 
   .section{padding:96px 0;}
   .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:56px; flex-wrap:wrap;}
@@ -228,6 +231,9 @@
   .quiz-result-product .qrp-name{font-weight:600; font-size:14px; color:var(--white);}
   .quiz-result-product .qrp-price{font-size:12.5px; color:var(--white-soft); margin-top:2px;}
   .routines{background:var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .why-pave{padding:64px 0;}
+  .why-pave-img{width:100%; height:auto; display:block; border-radius:14px; border:1px solid var(--line-strong);}
+  .why-pave-cta{text-align:center; margin-top:36px;}
   .routine-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
   .routine-card{border:1px solid var(--line-strong); border-radius:10px; padding:30px; background:var(--black-2); display:flex; flex-direction:column; gap:16px; transition:transform .25s, border-color .25s;}
   .routine-card:hover{transform:translateY(-5px); border-color:var(--violet);}
@@ -327,6 +333,26 @@
   }
   .toast.show{transform:translateX(-50%) translateY(0);}
   .toast svg{width:16px; height:16px; color:var(--violet);}
+  body.cta-visible .toast{bottom:calc(86px + env(safe-area-inset-bottom));}
+
+  .sticky-cta{
+    position:fixed; left:0; right:0; bottom:0; z-index:150;
+    background:rgba(10,10,13,.9); backdrop-filter:blur(14px); border-top:1px solid var(--line-strong);
+    padding:14px 20px calc(14px + env(safe-area-inset-bottom)) 20px;
+    transform:translateY(100%); transition:transform .35s cubic-bezier(.2,.9,.3,1);
+    box-shadow:0 -12px 30px -14px rgba(0,0,0,.6);
+  }
+  .sticky-cta.show{transform:translateY(0);}
+  .sticky-cta-inner{max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:16px;}
+  .sticky-cta-brand{display:flex; align-items:center; gap:10px; min-width:0;}
+  .sticky-cta-brand img{height:22px; width:auto; flex-shrink:0;}
+  .sticky-cta-text{display:flex; flex-direction:column; line-height:1.15; min-width:0;}
+  .sticky-cta-text .t1{font-size:13.5px; font-weight:600; color:var(--white); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .sticky-cta-text .t2{font-size:11.5px; color:var(--white-dim);}
+  .sticky-cta .btn{padding:12px 22px; font-size:13.5px; white-space:nowrap; flex-shrink:0;}
+  @media (max-width:480px){
+    .sticky-cta-text .t2{display:none;}
+  }
 
   .reveal{opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease;}
   .reveal.in{opacity:1; transform:translateY(0);}
@@ -397,6 +423,19 @@
   <span id="toastMsg">Added to bag</span>
 </div>
 
+<div class="sticky-cta" id="stickyCta">
+  <div class="sticky-cta-inner">
+    <div class="sticky-cta-brand">
+      <img src="logo.jpg" alt="PAVE">
+      <div class="sticky-cta-text">
+        <span class="t1">Not sure where to start?</span>
+        <span class="t2">Shop the full PAVE lineup</span>
+      </div>
+    </div>
+    <a href="#lineup" class="btn btn-primary">Shop Now</a>
+  </div>
+</div>
+
 <div class="cart-overlay" id="cartOverlay"></div>
 <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping bag">
   <div class="cart-head">
@@ -455,13 +494,13 @@
         </div>
       </div>
       <div class="hero-visual reveal">
-        <a href="#matte-clay" style="display:block;" aria-label="Shop Matte Clay">
+        <a href="#curl-cream" style="display:block;" aria-label="Shop Curl Cream">
         <div class="hero-image-frame">
           <div class="best-seller-badge">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9-6.3 3.9 1.7-7L2 9.2l7.1-.6z"/></svg>
             Best Seller
           </div>
-          <img src="clay.png" alt="PAVE Matte Clay tin, 100g">
+          <img src="curlcream.png" alt="PAVE Leave-In Curl Cream">
         </div>
         </a>
         <div class="hero-badge-float">
@@ -490,13 +529,13 @@
           <div class="eyebrow">Real Results</div>
           <h2>See the transformation</h2>
         </div>
-        <p class="lede">Real heads, styled with real PAVE routines.</p>
       </div>
       <div class="results-tabs reveal" id="resultsTabs"></div>
       <div class="results-body reveal">
         <div class="results-copy">
           <span class="routine-tag" id="resultsTag"></span>
           <h3 id="resultsTitle"></h3>
+          <div class="results-products" id="resultsProducts"></div>
           <button class="btn btn-primary" id="resultsShopBtn">Shop This Routine</button>
         </div>
         <div class="results-media">
@@ -562,6 +601,15 @@
         <p class="lede">Bundle these products for a complete hair routine.</p>
       </div>
       <div class="routine-grid" id="routineList"></div>
+    </div>
+  </section>
+
+  <section class="section why-pave">
+    <div class="wrap">
+      <img src="why-pave-comparison.jpg" alt="Why choose PAVE? Comparison of PAVE vs other brands: no parabens, no sulfates, full ingredient transparency, no endocrine disruptors, formulated and filled in Australia." class="why-pave-img reveal">
+      <div class="why-pave-cta reveal">
+        <a href="#lineup" class="btn btn-primary">Shop Now</a>
+      </div>
     </div>
   </section>
 
@@ -639,12 +687,13 @@
     <div class="wrap">
       <div class="section-head reveal"><div><span class="eyebrow">FAQ</span><h2>Before You Buy</h2></div></div>
       <div class="faq-list reveal">
-        <div class="faq-item open"><button class="faq-q">How do I know what products to use on my hair?<span class="plus">+</span></button><div class="faq-a"><p>Take our quick and simple quiz to find the optimal products for your hair.</p><a href="#quiz" class="btn btn-primary" style="margin-top:16px; display:inline-flex;">Take the Quiz</a></div></div>
+        <div class="faq-item"><button class="faq-q">How do I know what products to use on my hair?<span class="plus">+</span></button><div class="faq-a"><p>Take our quick and simple quiz to find the optimal products for your hair.</p><a href="#quiz" class="btn btn-primary" style="margin-top:16px; display:inline-flex;">Take the Quiz</a></div></div>
         <div class="faq-item"><button class="faq-q">Is PAVE cruelty-free?<span class="plus">+</span></button><div class="faq-a"><p>Yes. We never test on animals, and we don't work with manufacturers who do either.</p></div></div>
         <div class="faq-item"><button class="faq-q">Is it really sulphate and paraben free?<span class="plus">+</span></button><div class="faq-a"><p>Every product in the lineup is formulated without sulphates or parabens.</p></div></div>
         <div class="faq-item"><button class="faq-q">How long does each product last?<span class="plus">+</span></button><div class="faq-a"><p>It varies on how much use and which product, but generally each product should last 1-3 months.</p></div></div>
         <div class="faq-item"><button class="faq-q">Where is PAVE made?<span class="plus">+</span></button><div class="faq-a"><p>All five formulas are made in Australia.</p></div></div>
-        <div class="faq-item"><button class="faq-q">Do you offer a guarantee?<span class="plus">+</span></button><div class="faq-a"><p>We have a 14-day return policy, which means you have 14 days after receiving your item to request a return.</p><p>To be eligible for a return, your item must be unopened and unused, in its original packaging. You'll also need the receipt or proof of purchase. Due to the nature of our products, we are unable to accept returns on opened or used items for hygiene reasons.</p><p>To start a return, you can contact us at <a href="mailto:pavebypkay@gmail.com" style="color:var(--violet-soft); text-decoration:underline;">pavebypkay@gmail.com</a></p></div></div>
+        <div class="faq-item"><button class="faq-q">How long does shipping take?<span class="plus">+</span></button><div class="faq-a"><p>We offer a standard shipping option that usually takes 2-5 Business Days and we also offer an express shipping option that usually takes 1-3 Business Days.</p></div></div>
+        <div class="faq-item"><button class="faq-q">What is your return policy?<span class="plus">+</span></button><div class="faq-a"><p>We have a 14-day return policy, which means you have 14 days after receiving your item to request a return.</p><p>To be eligible for a return, your item must be unopened and unused, in its original packaging. You'll also need the receipt or proof of purchase. Due to the nature of our products, we are unable to accept returns on opened or used items for hygiene reasons.</p><p>To start a return, you can contact us at <a href="mailto:pavebypkay@gmail.com" style="color:var(--violet-soft); text-decoration:underline;">pavebypkay@gmail.com</a></p></div></div>
       </div>
     </div>
   </section>
@@ -658,8 +707,8 @@
         <div class="logo"><img src="logo.jpg" alt="PAVE logo" class="logo-img"></div>
         <p>Hair styling for real texture. Organic ingredients, made in Australia, cruelty-free from day one.</p>
         <div class="social-row">
-          <a href="#" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
-          <a href="#" aria-label="TikTok"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M16 3a5 5 0 0 0 5 5"/></svg></a>
+          <a href="https://www.instagram.com/pavebypkay/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="https://www.tiktok.com/@pavebypkay" target="_blank" rel="noopener" aria-label="TikTok"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M16 3a5 5 0 0 0 5 5"/></svg></a>
         </div>
       </div>
       <div class="foot-col"><h5>Shop</h5><ul>
@@ -707,7 +756,7 @@
       rating: '★★★★★',
       ratingValue: '4.9',
       reviewCount: '120',
-      images: ['clayfruit.png', 'clay.png', 'clayai.png', 'clayrank.png'],
+      images: ['clayfruit.png', 'clay.png', 'clayai.png', 'matteclay4logos.png', 'clayrank.png'],
     },
     {
       id: 'texture-powder',
@@ -728,7 +777,7 @@
       rating: '★★★★★',
       ratingValue: '4.9',
       reviewCount: '126',
-      images: ['texturefruit.png', 'texture.png', 'textureai.png', 'texturerank.png'],
+      images: ['texturefruit.png', 'texture.png', 'textureai.png', 'texturepowder4logos.png', 'texturerank.png'],
     },
     {
       id: 'sea-salt-spray',
@@ -749,7 +798,7 @@
       rating: '★★★★★',
       ratingValue: '5.0',
       reviewCount: '112',
-      images: ['seasaltfruit.png', 'seasaltspray.png', 'seasaltsprayai.png', 'seasaltrank.png'],
+      images: ['seasaltfruit.png', 'seasaltspray.png', 'seasaltsprayai.png', 'seasalt4logos.png', 'seasaltrank.png'],
     },
     {
       id: 'curl-cream',
@@ -770,12 +819,12 @@
       rating: '★★★★★',
       ratingValue: '4.9',
       reviewCount: '116',
-      images: ['creamfruit.png', 'curlcream.png', 'curlcreamai.png', 'creamrank.png'],
+      images: ['creamfruit.png', 'curlcream.png', 'curlcreamai.png', 'curlcream4logos.png', 'creamrank.png'],
     },
     {
       id: 'curl-spray',
       name: 'Curl Spray',
-      tagline: 'Enhance Curls · Anti-Frizz',
+      tagline: 'Enhances Curls · Anti-Frizz',
       seoTitle: 'Curl Refresher Spray | Define & Refresh Curls | PAVE',
       seoDescription: 'Revive, define and refresh your curls between washes with PAVE Curl Spray. Lightweight moisture and movement that never weighs curls down.',
       permalink: 'curl-refresher-spray-for-men',
@@ -791,7 +840,7 @@
       rating: '★★★★☆',
       ratingValue: '4.8',
       reviewCount: '108',
-      images: ['curlsprayfruit.png', 'curlspray.png', 'curlsprayai.png', 'curlsprayrank.png'],
+      images: ['curlsprayfruit.png', 'curlspray.png', 'curlsprayai.png', 'curlspray4logos.png', 'curlsprayrank.png'],
     },
   ];
 
@@ -1163,8 +1212,19 @@
     img.src = t.image;
     img.alt = `${t.tag} result`;
 
+    const routineMatch = ROUTINES.find(r => r.tag === t.routineTag);
+    const productsEl = document.getElementById('resultsProducts');
+    if(routineMatch){
+      productsEl.innerHTML = routineMatch.ids.map((id, i) => {
+        const p = PRODUCT_MAP[id];
+        const plus = i > 0 ? '<span class="plus">+</span>' : '';
+        return `${plus}<img src="${p.images[0]}" alt="${p.name}">`;
+      }).join('');
+    } else {
+      productsEl.innerHTML = '';
+    }
+
     document.getElementById('resultsShopBtn').onclick = () => {
-      const routineMatch = ROUTINES.find(r => r.tag === t.routineTag);
       const targetId = routineMatch ? `routine-${slugifyTag(routineMatch.tag)}` : 'lineup';
       const el = document.getElementById(targetId) || document.getElementById('lineup');
       if(lenis){ lenis.scrollTo(el); } else { el.scrollIntoView({ behavior: 'smooth' }); }
@@ -1463,6 +1523,36 @@
     });
   }
 
+  // ---------- Sticky Shop Now bar ----------
+  function initStickyCta(){
+    const bar = document.getElementById('stickyCta');
+    const hero = document.querySelector('.hero');
+    const lineup = document.getElementById('lineup');
+    const footer = document.querySelector('footer');
+    if(!bar || !hero || !lineup || !footer) return;
+
+    const state = { hero: true, lineup: false, footer: false };
+
+    function update(){
+      const shouldShow = !state.hero && !state.lineup && !state.footer;
+      bar.classList.toggle('show', shouldShow);
+      document.body.classList.toggle('cta-visible', shouldShow);
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.target === hero) state.hero = entry.isIntersecting;
+        if(entry.target === lineup) state.lineup = entry.isIntersecting;
+        if(entry.target === footer) state.footer = entry.isIntersecting;
+      });
+      update();
+    }, { threshold: 0.08 });
+
+    io.observe(hero);
+    io.observe(lineup);
+    io.observe(footer);
+  }
+
   // ---------- Init ----------
   renderProducts();
   renderRoutines();
@@ -1472,6 +1562,7 @@
   observeReveals();
   updateBagCount();
   renderCart();
+  initStickyCta();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
