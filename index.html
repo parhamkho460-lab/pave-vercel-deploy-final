@@ -940,10 +940,11 @@
     {
       question: 'What style are you going for?',
       options: [
-        { label: 'Clean and structured — sharp, intentional', scores: { 'matte-clay': 3, 'texture-powder': 2 } },
-        { label: 'Textured and effortless — lived-in, casual', scores: { 'sea-salt-spray': 3, 'texture-powder': 2 } },
+        { label: 'Textured and structured — sharp, grippy hold', scores: { 'matte-clay': 3, 'texture-powder': 3 } },
+        { label: 'Modern and beachy — natural movement, held in place', scores: { 'sea-salt-spray': 3, 'matte-clay': 2 } },
+        { label: 'Wavy and undone — effortless beach texture', scores: { 'sea-salt-spray': 2, 'curl-spray': 3 } },
         { label: 'Defined curls — enhanced natural shape', scores: { 'curl-cream': 3, 'curl-spray': 2 } },
-        { label: 'Full and voluminous — big hair energy', scores: { 'texture-powder': 3, 'sea-salt-spray': 2 } },
+        { label: 'Full commitment — maximum texture, hold and volume', scores: { 'matte-clay': 2, 'texture-powder': 2, 'sea-salt-spray': 2 } },
       ]
     },
   ];
@@ -970,15 +971,15 @@
       copy: 'Sea Salt Spray creates the base movement and texture; Matte Clay locks it in for a style that holds all day without looking overdone.',
       ids: ['sea-salt-spray', 'matte-clay'],
     },
-    'sea-salt-spray|texture-powder': {
-      title: 'The Effortless Volume Routine',
-      copy: 'Sea Salt Spray brings the wave and movement; Texture Powder adds grip and lift at the roots. Maximum texture, minimum effort.',
-      ids: ['sea-salt-spray', 'texture-powder'],
+    'sea-salt-spray|curl-spray': {
+      title: 'The Wavy Routine',
+      copy: 'Sea Salt Spray builds natural wave and everyday texture; Curl Spray keeps things defined and frizz-free between washes. Effortless, beachy movement that actually lasts.',
+      ids: ['sea-salt-spray', 'curl-spray'],
     },
-    'texture-powder|sea-salt-spray': {
-      title: 'The Effortless Volume Routine',
-      copy: 'Sea Salt Spray brings the wave and movement; Texture Powder adds grip and lift at the roots. Maximum texture, minimum effort.',
-      ids: ['sea-salt-spray', 'texture-powder'],
+    'curl-spray|sea-salt-spray': {
+      title: 'The Wavy Routine',
+      copy: 'Sea Salt Spray builds natural wave and everyday texture; Curl Spray keeps things defined and frizz-free between washes. Effortless, beachy movement that actually lasts.',
+      ids: ['sea-salt-spray', 'curl-spray'],
     },
     'curl-cream|curl-spray': {
       title: 'The Curly Routine',
@@ -994,8 +995,8 @@
 
   const FALLBACK_PAIRS = {
     'matte-clay':     ['matte-clay', 'texture-powder'],
-    'texture-powder': ['texture-powder', 'sea-salt-spray'],
-    'sea-salt-spray': ['sea-salt-spray', 'texture-powder'],
+    'texture-powder': ['texture-powder', 'matte-clay'],
+    'sea-salt-spray': ['sea-salt-spray', 'matte-clay'],
     'curl-cream':     ['curl-cream', 'curl-spray'],
     'curl-spray':     ['curl-spray', 'curl-cream'],
   };
@@ -1014,7 +1015,9 @@
     document.getElementById('quizResultAdd').addEventListener('click', ()=> {
       const resultEl = document.getElementById('quizResult');
       const ids = JSON.parse(resultEl.dataset.ids || '[]');
-      if(ids.length){ ids.forEach(id => addToCart(id)); openCart(); }
+      if(!ids.length) return;
+      if(resultEl.dataset.bundle === 'true'){ addBundle(ids); }
+      else { ids.forEach(id => addToCart(id)); openCart(); }
     });
   }
 
@@ -1077,22 +1080,49 @@
       });
     });
     const ranked = Object.entries(scores).sort((a,b) => b[1] - a[1]).map(([id]) => id);
-    let primary = ranked[0] || 'matte-clay';
-    let secondary = ranked[1] || FALLBACK_PAIRS[primary][1];
-    if(secondary === primary){ secondary = FALLBACK_PAIRS[primary][1]; }
 
-    const pairKey = primary + '|' + secondary;
-    const altKey  = secondary + '|' + primary;
-    let pair = PAIR_COPY[pairKey] || PAIR_COPY[altKey];
-    if(!pair){
-      const fb = FALLBACK_PAIRS[primary];
-      pair = PAIR_COPY[fb[0] + '|' + fb[1]] || PAIR_COPY[fb[1] + '|' + fb[0]];
-      pair = pair || { title: 'Your Routine', copy: 'These two products work best together for your hair type and goals.', ids: [primary, secondary] };
+    // Only recommend the 3-product Ultimate Texture Routine when its three
+    // products are genuinely close in score to each other (a real "I want it all"
+    // signal) — not just whichever 3 ids happen to rank highest by elimination.
+    const ultimateRoutine = ROUTINES.find(r => r.tag === 'The Ultimate Texture Routine');
+    let isUltimateMatch = false;
+    if(ultimateRoutine){
+      const uScores = ultimateRoutine.ids.map(id => scores[id] || 0);
+      const minU = Math.min(...uScores);
+      const maxU = Math.max(...uScores);
+      const otherScores = Object.entries(scores)
+        .filter(([id]) => !ultimateRoutine.ids.includes(id))
+        .map(([, v]) => v);
+      const maxOther = otherScores.length ? Math.max(...otherScores) : 0;
+      isUltimateMatch = minU > 0 && minU >= maxU * 0.55 && minU > maxOther;
     }
 
-    const p1 = PRODUCT_MAP[pair.ids[0]];
-    const p2 = PRODUCT_MAP[pair.ids[1]];
-    const combined = (p1.price + p2.price).toFixed(2);
+    let pair;
+    if(isUltimateMatch){
+      pair = {
+        title: ultimateRoutine.tag,
+        copy: 'You want it all — maximum texture, hold and volume. This bundles the full texture lineup together at a discount.',
+        ids: ultimateRoutine.ids,
+        discountPrice: ultimateRoutine.discountPrice,
+      };
+    } else {
+      let primary = ranked[0] || 'matte-clay';
+      let secondary = ranked[1] || FALLBACK_PAIRS[primary][1];
+      if(secondary === primary){ secondary = FALLBACK_PAIRS[primary][1]; }
+
+      const pairKey = primary + '|' + secondary;
+      const altKey  = secondary + '|' + primary;
+      pair = PAIR_COPY[pairKey] || PAIR_COPY[altKey];
+      if(!pair){
+        const fb = FALLBACK_PAIRS[primary];
+        pair = PAIR_COPY[fb[0] + '|' + fb[1]] || PAIR_COPY[fb[1] + '|' + fb[0]];
+        pair = pair || { title: 'Your Routine', copy: 'These two products work best together for your hair type and goals.', ids: [primary, secondary] };
+      }
+    }
+
+    const products = pair.ids.map(id => PRODUCT_MAP[id]);
+    const fullTotal = products.reduce((s,p) => s + p.price, 0);
+    const combined = (pair.discountPrice || fullTotal).toFixed(2);
 
     const resultEl = document.getElementById('quizResult');
     document.getElementById('quizResultTitle').textContent = pair.title;
@@ -1110,7 +1140,9 @@
       `;
     }).join('');
     resultEl.dataset.ids = JSON.stringify(pair.ids);
-    document.getElementById('quizResultAdd').textContent = `Add Both To Bag — $${combined}`;
+    resultEl.dataset.bundle = pair.discountPrice ? 'true' : 'false';
+    document.getElementById('quizResultAdd').textContent = pair.ids.length > 2 ?
+      `Add Routine To Bag — $${combined}` : `Add Both To Bag — $${combined}`;
     resultEl.classList.remove('hidden');
     document.getElementById('quizNext').textContent = 'Retake Quiz';
     document.getElementById('quizNext').disabled = false;
@@ -1326,6 +1358,15 @@
   const toast = document.getElementById('toast');
   const toastMsg = document.getElementById('toastMsg');
   let toastTimer;
+
+  // Some mobile browsers restore a page from cache (e.g. swiping back) with
+  // whatever DOM state it was left in — if the toast happened to be mid-animation
+  // when the person navigated away, it can come back looking permanently stuck.
+  // Force it hidden on every page show so it never appears without a fresh action.
+  window.addEventListener('pageshow', () => {
+    clearTimeout(toastTimer);
+    toast.classList.remove('show');
+  });
 
   function showToast(msg){
     toastMsg.textContent = msg;
