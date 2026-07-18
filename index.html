@@ -1365,14 +1365,14 @@
   // Force it hidden on every page show so it never appears without a fresh action.
   window.addEventListener('pageshow', () => {
     clearTimeout(toastTimer);
-    toast.classList.remove('show');
+    toast.classList.remove('pave-toast--visible');
   });
 
   function showToast(msg){
     toastMsg.textContent = msg;
-    toast.classList.add('show');
+    toast.classList.add('pave-toast--visible');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(()=> toast.classList.remove('show'), 2400);
+    toastTimer = setTimeout(()=> toast.classList.remove('pave-toast--visible'), 2400);
   }
   function getCart(){
     try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
@@ -1576,8 +1576,8 @@
 
     function update(){
       const shouldShow = !state.hero && !state.lineup && !state.footer;
-      bar.classList.toggle('show', shouldShow);
-      document.body.classList.toggle('cta-visible', shouldShow);
+      bar.classList.toggle('pave-sticky-cta--visible', shouldShow);
+      document.body.classList.toggle('pave-cta-visible', shouldShow);
     }
 
     const io = new IntersectionObserver((entries) => {
