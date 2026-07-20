@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Shop PAVE Texture Powder — premium hair styling, made in Australia, cruelty-free, sulphate and paraben free.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Texture Powder | PAVE">
+<meta property="og:description" content="Shop PAVE Texture Powder — premium hair styling, made in Australia, cruelty-free, sulphate and paraben free.">
+<meta property="og:image" content="https://example.com/og-image.jpg">
+<meta property="og:url" content="https://example.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Texture Powder | PAVE">
+<meta name="twitter:description" content="Shop PAVE Texture Powder — premium hair styling, made in Australia, cruelty-free, sulphate and paraben free.">
+<meta name="twitter:image" content="https://example.com/og-image.jpg">
+<title>Texture Powder | PAVE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-product-id="texture-powder">
+
+<div class="pave-toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+  <span id="toastMsg">Added to bag</span>
+</div>
+
+<div class="pave-sticky-cta" id="stickyCta">
+  <div class="pave-sticky-cta-inner">
+    <div class="pave-sticky-cta-brand">
+      <img src="logo.jpg" alt="PAVE">
+      <div class="pave-sticky-cta-text">
+        <span class="pave-cta-t1">Not sure where to start?</span>
+        <span class="pave-cta-t2">Shop the full PAVE lineup</span>
+      </div>
+    </div>
+    <a href="index.html#lineup" class="btn btn-primary">Shop Now</a>
+  </div>
+</div>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping bag">
+  <div class="cart-head">
+    <h3>Your Bag</h3>
+    <button class="cart-close" id="cartClose" aria-label="Close bag">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-empty" id="cartEmpty">Your bag is empty.</div>
+  <div class="cart-footer">
+    <div class="cart-subtotal"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+    <button class="btn btn-primary cart-checkout" id="cartCheckoutBtn">Checkout</button>
+    <div class="cart-error" id="cartError"></div>
+
+  </div>
+</aside>
+
+<div class="announce">STOREWIDE SALE &nbsp;·&nbsp; 14&#8209;DAY GUARANTEE &nbsp;·&nbsp; MADE IN AUSTRALIA</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="logo.jpg" alt="PAVE logo" class="logo-img"></a>
+    <nav class="nav-links">
+      <a href="index.html#lineup">Shop</a>
+      <a href="index.html#ingredients">Ingredients</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+    <button class="bag-btn" id="bagBtn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      Cart <span class="bag-count" id="bagCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="section" style="padding-bottom:0;">
+    <div class="wrap">
+      <a class="back-link" href="index.html#lineup">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        Back to Shop
+      </a>
+      <div class="product-hero" id="productDetail"></div>
+    </div>
+  </section>
+
+  <section class="section routines" id="bundleUpSection">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div><span class="eyebrow">Complete The Look</span><h2>Bundle Up</h2></div>
+        <p class="lede">Texture Powder pairs perfectly with these routines.</p>
+      </div>
+      <div class="routine-grid" id="bundleList"></div>
+    </div>
+  </section>
+
+  <div class="img-modal" id="imageModal" aria-hidden="true" onclick="closeImageModal()">
+    <div class="img-modal-content" onclick="event.stopPropagation()">
+      <button class="img-modal-close" type="button" onclick="closeImageModal()">×</button>
+      <img id="modalImg" src="" alt="">
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><img src="logo.jpg" alt="PAVE logo" class="logo-img"></div>
+        <p>Hair styling for real texture. Organic ingredients, made in Australia, cruelty-free from day one.</p>
+        <div class="social-row">
+          <a href="https://www.instagram.com/pavebypkay/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="https://www.tiktok.com/@pavebypkay" target="_blank" rel="noopener" aria-label="TikTok"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M16 3a5 5 0 0 0 5 5"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col"><h5>Shop</h5><ul>
+        <li><a href="matte-clay.html">Matte Clay</a></li><li><a href="curl-cream.html">Leave-In Curl Cream</a></li>
+        <li><a href="sea-salt-spray.html">Sea Salt Spray</a></li><li><a href="curl-spray.html">Curl Spray</a></li><li><a href="texture-powder.html">Texture Powder</a></li>
+      </ul></div>
+      <div class="foot-col"><h5>Company</h5><ul>
+        <li><a href="index.html#ingredients">Ingredients</a></li><li><a href="index.html#reviews">Reviews</a></li><li><a href="#">Contact</a></li>
+      </ul></div>
+      <div class="foot-col"><h5>Support</h5><ul>
+        <li><a href="index.html#faq">FAQ</a></li><li><a href="index.html#faq">Shipping</a></li><li><a href="index.html#faq">Returns</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 PAVE. All rights reserved.</span>
+      <span>Made in Australia · Checkout secured by Square</span>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+</body>
+</html>
