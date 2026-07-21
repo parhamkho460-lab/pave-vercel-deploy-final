@@ -1,5 +1,47 @@
 const PRODUCTS = [
     {
+      id: 'curl-cream',
+      name: 'Leave-In Curl Cream',
+      tagline: 'Define · Nourish · Anti-Frizz',
+      seoTitle: 'Leave-In Curl Cream | Define Curls & Reduce Frizz | PAVE',
+      seoDescription: 'Define, hydrate and smooth your curls with PAVE Leave-In Curl Cream. Lightweight moisture and frizz control for soft, bouncy curls with no crunch.',
+      permalink: 'leave-in-curl-cream-for-men',
+      highlights: [
+        'Defines curls without stiffness',
+        'Boosts bounce and softness',
+        'Smooths frizz while keeping hair touchable',
+      ],
+      description: 'A lightweight leave-in curl cream that enhances your natural curl pattern, smooths frizz and keeps curls looking healthy and defined all day. The kind of curls that look perfect and actually feel soft.',
+      tags: [],
+      price: 34.99,
+      size: '250ml',
+      rating: '★★★★★',
+      ratingValue: '4.9',
+      reviewCount: '116',
+      images: ['creamfruit.png', 'curlcream.png', 'curlcreamai.png', 'creamrank.png'],
+    },
+    {
+      id: 'curl-spray',
+      name: 'Curl Spray',
+      tagline: 'Enhances Curls · Anti-Frizz',
+      seoTitle: 'Curl Refresher Spray | Define & Refresh Curls | PAVE',
+      seoDescription: 'Revive, define and refresh your curls between washes with PAVE Curl Spray. Lightweight moisture and movement that never weighs curls down.',
+      permalink: 'curl-refresher-spray-for-men',
+      highlights: [
+        'Refreshes curls between washes',
+        'Locks in shape without stickiness',
+        'Fights frizz and humidity',
+      ],
+      description: 'A lightweight refresh spray that brings your curls back to life between washes. Adds moisture, shape and movement without weighing curls down or leaving any sticky residue.',
+      tags: [],
+      price: 24.99,
+      size: '125ml',
+      rating: '★★★★☆',
+      ratingValue: '4.8',
+      reviewCount: '108',
+      images: ['curlsprayfruit.png', 'curlspray.png', 'curlsprayai.png', 'curlsprayrank.png'],
+    },
+    {
       id: 'matte-clay',
       name: 'Matte Clay',
       tagline: 'Matte Finish · High Hold',
@@ -61,48 +103,6 @@ const PRODUCTS = [
       ratingValue: '5.0',
       reviewCount: '112',
       images: ['seasaltfruit.png', 'seasaltspray.png', 'seasaltsprayai.png', 'seasaltrank.png'],
-    },
-    {
-      id: 'curl-cream',
-      name: 'Leave-In Curl Cream',
-      tagline: 'Define · Nourish · Anti-Frizz',
-      seoTitle: 'Leave-In Curl Cream | Define Curls & Reduce Frizz | PAVE',
-      seoDescription: 'Define, hydrate and smooth your curls with PAVE Leave-In Curl Cream. Lightweight moisture and frizz control for soft, bouncy curls with no crunch.',
-      permalink: 'leave-in-curl-cream-for-men',
-      highlights: [
-        'Defines curls without stiffness',
-        'Boosts bounce and softness',
-        'Smooths frizz while keeping hair touchable',
-      ],
-      description: 'A lightweight leave-in curl cream that enhances your natural curl pattern, smooths frizz and keeps curls looking healthy and defined all day. The kind of curls that look perfect and actually feel soft.',
-      tags: [],
-      price: 34.99,
-      size: '250ml',
-      rating: '★★★★★',
-      ratingValue: '4.9',
-      reviewCount: '116',
-      images: ['creamfruit.png', 'curlcream.png', 'curlcreamai.png', 'creamrank.png'],
-    },
-    {
-      id: 'curl-spray',
-      name: 'Curl Spray',
-      tagline: 'Enhances Curls · Anti-Frizz',
-      seoTitle: 'Curl Refresher Spray | Define & Refresh Curls | PAVE',
-      seoDescription: 'Revive, define and refresh your curls between washes with PAVE Curl Spray. Lightweight moisture and movement that never weighs curls down.',
-      permalink: 'curl-refresher-spray-for-men',
-      highlights: [
-        'Refreshes curls between washes',
-        'Locks in shape without stickiness',
-        'Fights frizz and humidity',
-      ],
-      description: 'A lightweight refresh spray that brings your curls back to life between washes. Adds moisture, shape and movement without weighing curls down or leaving any sticky residue.',
-      tags: [],
-      price: 24.99,
-      size: '125ml',
-      rating: '★★★★☆',
-      ratingValue: '4.8',
-      reviewCount: '108',
-      images: ['curlsprayfruit.png', 'curlspray.png', 'curlsprayai.png', 'curlsprayrank.png'],
     },
   ];
  
@@ -477,13 +477,7 @@ const PRODUCTS = [
           `).join('')}
         </div>
         ${ingredient ? `
-          <div class="key-ingredient reveal" onclick="openIngredientModal('${ingredient.image}','${ingredient.name}')">
-            <img src="${ingredient.image}" alt="${ingredient.name} key ingredient">
-            <div>
-              <div class="ki-label">Key Ingredient</div>
-              <div class="ki-name">${ingredient.name}</div>
-            </div>
-          </div>
+          <img class="key-ingredient-full reveal" src="${ingredient.image}" alt="${ingredient.name} key ingredient">
         ` : ''}
       </div>
       <div class="p-info">
@@ -697,6 +691,15 @@ const PRODUCTS = [
   window.addEventListener('pageshow', () => {
     clearTimeout(toastTimer);
     toast.classList.remove('pave-toast--visible');
+  });
+  // In-app browsers (TikTok, Instagram) and general app-switching can background
+  // a tab mid-timer without firing pageshow the way Safari/Chrome do. Catch that
+  // case too: whenever the tab becomes visible again, clear any stale toast.
+  document.addEventListener('visibilitychange', () => {
+    if(document.visibilityState === 'visible'){
+      clearTimeout(toastTimer);
+      toast.classList.remove('pave-toast--visible');
+    }
   });
  
   function showToast(msg){
