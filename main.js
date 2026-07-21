@@ -477,7 +477,12 @@ const PRODUCTS = [
           `).join('')}
         </div>
         ${ingredient ? `
-          <img class="key-ingredient-full reveal" src="${ingredient.image}" alt="${ingredient.name} key ingredient">
+          <div class="key-ingredient-wrap reveal" onclick="openIngredientModal('${ingredient.image}','${ingredient.name} — Key Ingredients')">
+            <img class="key-ingredient-full" src="${ingredient.image}" alt="${ingredient.name} key ingredient">
+            <span class="key-ingredient-zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+            </span>
+          </div>
         ` : ''}
       </div>
       <div class="p-info">
